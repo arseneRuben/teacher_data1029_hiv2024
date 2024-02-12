@@ -2,10 +2,15 @@
 -- publishers, employees(job_lvl), 
 -- --  les employes de niveau  JUNIOR ou INTERMEDIAIRE
 use library;
-SELECT emp_id, fname 
+SELECT distinct pub_id
 FROM employees 
 WHERE job_lvl = 'JUNIOR' OR  job_lvl = 'INTERMEDIAIRE';
 
-SELECT emp_id, fname 
+;
+
+SELECT * 
+FROM publishers p
+WHERE p.pub_id IN (SELECT  pub_id
 FROM employees 
-WHERE job_lvl IN ( 'JUNIOR' ,'INTERMEDIAIRE');
+WHERE job_lvl IN ( 'JUNIOR' ,'INTERMEDIAIRE'));
+
