@@ -14,3 +14,8 @@ WHERE p.pub_id IN (SELECT  pub_id
 FROM employees 
 WHERE job_lvl IN ( 'JUNIOR' ,'INTERMEDIAIRE'));
 
+-- Quels sont les editeurs employant plus de deux employes de niveau JUNIOR
+-- -- cherchons d'abord les employes de niveau JUNIOR
+SELECT emp_id 
+FROM employees 
+WHERE job_lvl = 'JUNIOR';
