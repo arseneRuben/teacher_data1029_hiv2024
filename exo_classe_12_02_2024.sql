@@ -65,6 +65,19 @@ FROM titles t JOIN publishers p ON t.pub_id = p.pub_id
 WHERE pub_name='Harmattan')
 GROUP BY au_id ;
 
+-- -- Retenons ce ces auteurs , que ceux qui ont publie uniquement chez Harmattan
+SELECT tl.pub_id , ta.au_id
+FROM titleauthor ta JOIN titles tl ON ta.title_id = tl.title_id
+WHERE au_id IN(
+SELECT au_id 
+FROM titleauthor
+WHERE title_id IN (
+SELECT t.title_id
+FROM titles t JOIN publishers p ON t.pub_id = p.pub_id
+WHERE pub_name='Harmattan')
+GROUP BY au_id)
+GROUP BY ta.au_id
+HAVING tl.pub_id IN (SELECT pub_id from publishers WHERE pub_name='Harmattan') ;
 
 
 -- 5- Liste des auteurs n'ayant publie que dans une seule maison d'edition
@@ -72,5 +85,4 @@ GROUP BY au_id ;
 -- 6- Liste des auteurs n'ayant publie dans plus d'une maison d'edition
 
 -- 7- Liste des auteurs n'ayant publie dans les maisons d'edition canadiennes
-INSERT INTO titleauthor VALUES(3, 1, 1, 2);
 
