@@ -19,3 +19,8 @@ WHERE job_lvl IN ( 'JUNIOR' ,'INTERMEDIAIRE'));
 SELECT emp_id 
 FROM employees 
 WHERE job_lvl = 'JUNIOR';
+-- regoupons les employes selon les employeurs (publishers)
+SELECT pub_id, COUNT(emp_id) 
+FROM employees 
+WHERE job_lvl = 'JUNIOR'
+GROUP BY(pub_id);
