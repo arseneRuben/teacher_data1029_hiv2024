@@ -48,11 +48,29 @@ HAVING COUNT(emp_id)  >=2 );
   group by au_id
   HAVING count(title_id)>1); 
 -- 4-Liste des auteurs n'ayant publie que dans la maison d'edition Harmattan, et donnez leur nombre de livres publies
+-- -- id de la maison d'edition Harmattan
+SELECT pub_id 
+FROM publishers
+WHERE pub_name='Harmattan';
+-- --  Liste des livres publies chez les editions Harmattan
+SELECT t.title_id
+FROM titles t JOIN publishers p ON t.pub_id = p.pub_id
+WHERE pub_name='Harmattan';
+-- -- Recherche des auteurs des livres publies chez harmattan
+SELECT au_id , count(title_id)
+FROM titleauthor
+WHERE title_id IN (
+SELECT t.title_id
+FROM titles t JOIN publishers p ON t.pub_id = p.pub_id
+WHERE pub_name='Harmattan')
+GROUP BY au_id ;
+
+
 
 -- 5- Liste des auteurs n'ayant publie que dans une seule maison d'edition
 
 -- 6- Liste des auteurs n'ayant publie dans plus d'une maison d'edition
 
 -- 7- Liste des auteurs n'ayant publie dans les maisons d'edition canadiennes
-
+INSERT INTO titleauthor VALUES(3, 1, 1, 2);
 
