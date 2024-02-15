@@ -79,6 +79,58 @@ GROUP BY au_id)
 GROUP BY ta.au_id
 HAVING tl.pub_id IN (SELECT pub_id from publishers WHERE pub_name='Harmattan') ;
 
+-- Une autre approche de solution a la question 4 
+
+
+-- Auteurs ayant publie a Eyrolles
+SELECT DISTINCT a.au_id
+FROM authors a
+JOIN titleauthor ta on a.au_id = ta.au_id
+JOIN titles t on ta.title_id = t.title_id
+JOIN publishers p on t.pub_id = p.pub_id
+WHERE p.pub_name = 'Eyrolles';
+
+-- Liste des autres maisons d'edition
+SELECT pub_id 
+FROM publishers 
+WHERE pub_name != 'Eyrolles';
+
+-- Liste des livres publies dans les maisons d'edition autres que Eyrolles
+SELECT title_id 
+FROM titles
+WHERE pub_id IN (SELECT pub_id 
+FROM publishers 
+WHERE pub_name != 'Eyrolles');
+
+-- Auteurs des livres publies dans les maisons d'edition autres que Eyrolles
+
+SELECT DISTINCT a.au_id
+FROM authors a
+JOIN titleauthor ta on a.au_id = ta.au_id
+JOIN titles t on ta.title_id = t.title_id
+WHERE t.title_id IN (SELECT title_id 
+FROM titles
+WHERE pub_id IN (SELECT pub_id 
+FROM publishers 
+WHERE pub_name != 'Eyrolles'));
+
+-- Auteurs des livres publies que a Eyrolles
+SELECT DISTINCT a.au_id
+FROM authors a
+JOIN titleauthor ta on a.au_id = ta.au_id
+JOIN titles t on ta.title_id = t.title_id
+JOIN publishers p on t.pub_id = p.pub_id
+WHERE p.pub_name = 'Eyrolles'
+EXCEPT
+SELECT DISTINCT a.au_id
+FROM authors a
+JOIN titleauthor ta on a.au_id = ta.au_id
+JOIN titles t on ta.title_id = t.title_id
+WHERE t.title_id IN (SELECT title_id 
+FROM titles
+WHERE pub_id IN (SELECT pub_id 
+FROM publishers 
+WHERE pub_name != 'Eyrolles'));
 
 -- 5- Liste des auteurs n'ayant publie que dans une seule maison d'edition
 
