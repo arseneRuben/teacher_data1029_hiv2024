@@ -50,3 +50,15 @@ create table Employees (
     pub_date date,
     email varchar(50) unique check (email like '%@%')
 );
+
+-- table Titles
+create table Titles (
+    title_id tinyint auto_increment primary key,
+    title varchar(100),
+    type enum('Roman', 'Politique', 'Science', 'Histoire'),
+    pub_id smallint references Publishers(pub_id),
+    price float,
+    advance float,
+    notes varchar(255),
+    pub_date date
+);
