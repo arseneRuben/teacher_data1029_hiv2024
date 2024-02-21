@@ -27,3 +27,13 @@ create table Jobs (
     min_lvl enum('Stagiaire', 'Junior', 'Intermediaire', 'Seinior'),
     max_lvl enum('Stagiaire', 'Junior', 'Intermediaire', 'Seinior')
 );
+
+-- table Publishers
+create table Publishers (
+    pub_id tinyint auto_increment primary key,
+    pub_name varchar(50),
+    city varchar(50),
+    state varchar(50),
+    country varchar(50),
+    email varchar(50) unique check (email like '%@%')
+);
