@@ -62,3 +62,12 @@ create table Titles (
     notes varchar(255),
     pub_date date
 );
+
+-- table Redactions
+create table Redactions (
+    au_id tinyint references Authors(au_id),
+    title_id tinyint references Titles(title_id),
+    au_ord tinyint,
+    royalty float,
+    constraint pk_redactions primary key (au_id, title_id)
+);
