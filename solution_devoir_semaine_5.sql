@@ -72,6 +72,16 @@ create table Redactions (
     constraint pk_redactions primary key (au_id, title_id)
 );
 
+-- table Stores
+create table Stores (
+    stor_id tinyint auto_increment primary key,
+    stor_name varchar(50),
+    stor_address varchar(50),
+    city varchar(50),
+    state varchar(50),
+    country varchar(50)
+);
+
 -- table Sales
 create table Sales (
     store_id tinyint references Stores(stor_id),
@@ -80,4 +90,15 @@ create table Sales (
     ord_date datetime,
     qty int,
     primary key (store_id, ord_num, title_id)
+);
+
+-- Renommer la table redactions en writing
+
+ALTER TABLE redactions RENAME TO writing;
+RENAME TABLE writing TO writings;
+
+-- Ajouter les colonnes ZIP et EMAIL a la table STORES
+ALTER TABLE stores ADD (
+	zip varchar(6) check (zip regexp '^[A-Za-z][0-9][A-Za-z][0-9][A-Za-z][0-9]$'),
+    email varchar(50) unique check (email like '%@%')
 );
