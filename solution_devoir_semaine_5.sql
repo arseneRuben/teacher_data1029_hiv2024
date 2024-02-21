@@ -41,13 +41,13 @@ create table Publishers (
 -- table Employees
 create table Employees (
     emp_id tinyint auto_increment primary key,
-    emp_name varchar(50),
+    emp_name varchar(50) NOT NULL,
     salary smallint,
     fname varchar(50),
     lname varchar(50),
     job_id smallint references Jobs(job_id),
-    pub_id smallint references Publishers(pub_id),
-    pub_date date,
+    pub_id smallint NOT NULL references  Publishers(pub_id),
+    pub_date date NOT NULL,
     email varchar(50) unique check (email like '%@%')
 );
 
@@ -102,3 +102,20 @@ ALTER TABLE stores ADD (
 	zip varchar(6) check (zip regexp '^[A-Za-z][0-9][A-Za-z][0-9][A-Za-z][0-9]$'),
     email varchar(50) unique check (email like '%@%')
 );
+
+-- Renommer la colonne zip en code zip dans la table stores
+ALTER TABLE stores
+CHANGE zip codezip varchar(6) check (codezip regexp '^[A-Za-z][0-9][A-Za-z][0-9][A-Za-z][0-9]$') 
+AFTER stor_id;
+
+
+insert into jobs(job_desc, min_lvl, max_lvl) values
+( "Traducteur", "Stagiaire", "SEINIOR");
+
+SELECT * FROM jobs;
+INSERT INTO `employees` (`emp_id`, `fname`, `lname`, `job_id`, `email`, `salary`) VALUES
+(1, 'Emmanuel', 'Bopda', 4, 'eman@gmail.com',   25),
+(2, 'Stephane', 'Lapointe', 3, 'valeryccnb.ca',   35),
+(3, 'Albert', 'Einstein', 4, 'steph@outlook.com', 25); 
+
+SELECT * FROM employees;
