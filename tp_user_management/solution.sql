@@ -10,3 +10,11 @@ GRANT SELECT, UPDATE, DELETE, INSERT ON epharmacy.role 	TO "pharmacist"@"localho
 GRANT SELECT, UPDATE, DELETE, INSERT ON epharmacy.user 	TO "pharmacist"@"localhost";
 GRANT SELECT, UPDATE, DELETE, INSERT ON epharmacy.supplier 	TO "pharmacist"@"localhost";
 GRANT SELECT, UPDATE, DELETE, INSERT ON epharmacy.connection_history 	TO "pharmacist"@"localhost";
+GRANT SELECT, INSERT ON epharmacy.product 	TO "pharmacist"@"localhost";
+
+-- 7
+SHOW GRANTS FOR "pharmacist"@"localhost";
+
+-- 8
+REVOKE DELETE ON epharmacy.orders FROM  "pharmacist"@"localhost";
+REVOKE DELETE ON epharmacy.orderline FROM  "pharmacist"@"localhost";
