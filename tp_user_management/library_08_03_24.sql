@@ -1,4 +1,4 @@
-drop database library;
+drop database if exists library;
 Create database if not exists library;
 use library;
 
