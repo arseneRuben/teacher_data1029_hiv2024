@@ -34,9 +34,10 @@ SELECT CONCAT(fname," ", lname) , pub_name
 FROM library.employees JOIN library.publishers ON employees.pub_id = publishers.pub_id;
 
 -- 2 Employes les plus remuneres par employeur
-SELECT CONCAT(fname," ", lname) , publishers.pub_name, Max(salary) 
+SELECT  publishers.pub_name, Max(salary) 
 FROM employees JOIN publishers ON employees.pub_id = publishers.pub_id
 GROUP BY publishers.pub_id;
+
 
 
 
