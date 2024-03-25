@@ -527,6 +527,7 @@ WHERE (e.salary, e.job_lvl) IN
   );
 
 -- 7. De quels types sont les livres les plus vendus?
+-- DANS CETTE APPROCHE, ON CHERCHE LE LIVRE LE PLUS VENDU AVANT DE TROUVER SON TYPE
 SELECT
   type
 FROM
@@ -544,6 +545,17 @@ WHERE
     LIMIT
       1
   );
+
+  -- OU ENCORE 
+  -- ICI ON REGROUPE LES VENTES DE LIVRE PAR TYPE ET ON EXAMINE CE TYPE QUI EST PLUS VENDU
+  SELECT t.type
+FROM titles t
+JOIN sales s ON t.title_id = s.title_id
+GROUP BY t.type
+ORDER BY SUM(s.qty) DESC;
+
+-- LES DEUX DONNES DES RESULTATS DIFFERENTS, MAIS ON VALIDE LES 2
+
 
 -- 8. Pour chaque boutique, les 2 livres les plus vendus et leurs prix
 SELECT
