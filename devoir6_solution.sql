@@ -500,6 +500,16 @@ FROM
 WHERE
   e.salary > avg_sal.avg_salary;
 
+  -- OU ENCORE 
+  SELECT CONCAT(e.fname, ' ', e.lname) AS Nom_Complet, e.salary, p.pub_name
+FROM employees e
+JOIN publishers p ON e.pub_id = p.pub_id
+WHERE e.salary > (
+    SELECT AVG(e.salary)
+    FROM employees e
+    WHERE p.pub_id = e.pub_id
+);
+
 -- 6. Noms complets des employés qui ont le salaire minimum de leur grade
 SELECT
   CONCAT (e.fname, ' ', e.lname) AS employee_name
