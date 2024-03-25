@@ -545,7 +545,6 @@ WHERE
     LIMIT
       1
   );
-
   -- OU ENCORE 
   -- ICI ON REGROUPE LES VENTES DE LIVRE PAR TYPE ET ON EXAMINE CE TYPE QUI EST PLUS VENDU
   SELECT t.type
@@ -554,41 +553,75 @@ JOIN sales s ON t.title_id = s.title_id
 GROUP BY t.type
 ORDER BY SUM(s.qty) DESC;
 
--- LES DEUX DONNES DES RESULTATS DIFFERENTS, MAIS ON VALIDE LES 2
+-- LES DEUX DONNENT DES RESULTATS DIFFERENTS, MAIS ON VALIDE LES 2
 
 
 -- 8. Pour chaque boutique, les 2 livres les plus vendus et leurs prix
-SELECT
-  s.stor_name,
-  t.title,
-  t.price
-FROM
-  stores s
-  JOIN sales sa ON s.stor_id = sa.stor_id
-  JOIN titles t ON sa.title_id = t.title_id
-WHERE
-  (sa.stor_id, sa.title_id) IN (
-    SELECT
-      stor_id,
-      title_id
-    FROM
-      sales
-    WHERE
-      (stor_id, title_id) IN (
-        SELECT
-          stor_id,
-          title_id
-        FROM
-          sales
-        GROUP BY
-          stor_id,
-          title_id
-        ORDER BY
-          SUM(qty) DESC
-        LIMIT
-          2
-      )
-  );
+  
+  (SELECT s.stor_id, s.title_id,t.title, SUM(qty) AS total_qty
+  FROM sales s JOIN titles t on t.title_id = s.title_id
+  WHERE s.stor_id = 1
+  GROUP BY  s.title_id
+  ORDER BY total_qty DESC
+  limit 2)
+  UNION
+  (SELECT s.stor_id, s.title_id,t.title, SUM(qty) AS total_qty
+  FROM sales s JOIN titles t on t.title_id = s.title_id
+  WHERE s.stor_id = 2
+  GROUP BY  s.title_id
+  ORDER BY total_qty DESC
+  limit 2)
+  UNION
+  (SELECT s.stor_id, s.title_id,t.title, SUM(qty) AS total_qty
+  FROM sales s JOIN titles t on t.title_id = s.title_id
+  WHERE s.stor_id = 3
+  GROUP BY  s.title_id
+  ORDER BY total_qty DESC
+  limit 2)
+  UNION
+  (SELECT s.stor_id, s.title_id,t.title, SUM(qty) AS total_qty
+  FROM sales s JOIN titles t on t.title_id = s.title_id
+  WHERE s.stor_id = 4
+  GROUP BY  s.title_id
+  ORDER BY total_qty DESC
+  limit 2)
+  UNION
+  (SELECT s.stor_id, s.title_id,t.title, SUM(qty) AS total_qty
+  FROM sales s JOIN titles t on t.title_id = s.title_id
+  WHERE s.stor_id = 5
+  GROUP BY  s.title_id
+  ORDER BY total_qty DESC
+  limit 2)
+  UNION
+  (SELECT s.stor_id, s.title_id,t.title, SUM(qty) AS total_qty
+  FROM sales s JOIN titles t on t.title_id = s.title_id
+  WHERE s.stor_id = 6
+  GROUP BY  s.title_id
+  ORDER BY total_qty DESC
+  limit 2)
+  UNION
+  (SELECT s.stor_id, s.title_id,t.title, SUM(qty) AS total_qty
+  FROM sales s JOIN titles t on t.title_id = s.title_id
+  WHERE s.stor_id = 7
+  GROUP BY  s.title_id
+  ORDER BY total_qty DESC
+  limit 2)
+  UNION
+  (SELECT s.stor_id, s.title_id,t.title, SUM(qty) AS total_qty
+  FROM sales s JOIN titles t on t.title_id = s.title_id
+  WHERE s.stor_id = 8
+  GROUP BY  s.title_id
+  ORDER BY total_qty DESC
+  limit 2)
+  UNION
+  (SELECT s.stor_id, s.title_id,t.title, SUM(qty) AS total_qty
+  FROM sales s JOIN titles t on t.title_id = s.title_id
+  WHERE s.stor_id = 9
+  GROUP BY  s.title_id
+  ORDER BY total_qty DESC
+  limit 2);
+  ...
+
 
 -- 9. Les auteurs des 5 livres les plus vendus
 SELECT
