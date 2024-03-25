@@ -444,7 +444,7 @@ FROM
   AND e2.lname = 'Zongo'
   AND e2.fname = 'Norbert';
   
-  -- 3. Noms complets des employés des éditeurs canadiens
+-- 3. Noms complets des employés des éditeurs canadiens
 SELECT
   CONCAT (e.fname, ' ', e.lname) AS employee_name
 FROM
@@ -515,15 +515,15 @@ SELECT
   CONCAT (e.fname, ' ', e.lname) AS employee_name
 FROM
   employees e
-  JOIN jobs j ON e.job_id = j.job_id
-WHERE
-  e.salary = (
+  
+WHERE (e.salary, e.job_lvl) IN
+ (
     SELECT
-      MIN(salary)
+      MIN(salary), employees.job_lvl
     FROM
       employees
-    WHERE
-      job_id = e.job_id
+    GROUP BY employees.job_lvl
+
   );
 
 -- 7. De quels types sont les livres les plus vendus?
