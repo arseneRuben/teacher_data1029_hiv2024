@@ -6,7 +6,10 @@
 -- Generation Time: Mar 12, 2024 at 11:57 AM
 -- Server version: 8.0.31
 -- PHP Version: 8.2.0
-
+DROP DATABASE IF EXISTS epharmacy;
+CREATE DATABASE IF NOT EXISTS epharmacy;
+USE epharmacy;
+SET FOREIGN_KEY_CHECKS = 0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -363,7 +366,7 @@ INSERT INTO `users` (`id`, `firstname`, `lastname`, `designation`, `adress`, `ci
 (2, 'Abdoulaye', 'Mohamed', 'Developer', '357 pascal avenue', 'Moncton', 'New Brunswick', 'country', '', '5068506548', 'admin@gmail.com', '$2y$10$mxu4KE3tqTdy8s34o1eTgu/pDFDcIptUbVh2MkC97XK24HRu02MKC', 1, 'hockey.png', 1),
 (3, 'Ali', 'Sani', '', '', '', '', 'country', '', '', 'm2atodev@gmail.com', '$2y$10$ZkWc4jbbtcp8KRB8424IkenOiahdqGHtYsAV.4qVTP7tGTSo6Pg5O', 1, 'agro piece.png', 2),
 (4, 'Fati', 'Amadou', 'Secretaire', '45 rue govin', 'Bathurst', 'New Brunswick', 'CA', 'E1A2C6', '5068598659', 'fati@gmail.com', '$2y$10$UfyW7UaIuxfnEuiMZS17JObEjaUvutOPHbDqp6DvFSr3dGdvNyClK', 1, '', 3),
-(5, 'Arsene', 'Foka', '', '', '', '', 'country', '', '', 'fopoar@gmail.com', '$2y$10$WgwKYSRsq4opsQ4b0npAZeo2gH3TDlrgwW8vZWh9ILT.8HSVudScm', 0, 'agro piece.png', 3),
+(5, 'Dupom', 'Poupi', '', '', '', '', 'country', '', '', 'poupi@gmail.com', '$2y$10$WgwKYSRsq4opsQ4b0npAZeo2gH3TDlrgwW8vZWh9ILT.8HSVudScm', 0, 'agro piece.png', 3),
 (6, 'Oumar', 'Moussa', 'RH', '', '', '', 'AF', 'E1A 2C', '', 'oumar@gmail.com', '$2y$10$yK0hyP693ZE94WVfNMgY7OkARBAWsgL6r1aW2Tv/GDOg9LZwWmADW', 1, '', 3);
 
 -- --------------------------------------------------------
@@ -433,3 +436,5 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+SET FOREIGN_KEY_CHECKS = 1;
